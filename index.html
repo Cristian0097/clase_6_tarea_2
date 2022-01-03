@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="main.css">
+</head>
+
+<body>
+
+    <form name="calculador-de-salarios">
+        <div>
+            <label>Calcular salarios</label>
+        </div>
+        <div>
+            <label>Agregue tantos campos como sean necesarios para ingresar el salario anual de cada
+                familiar
+            </label>
+        </div>
+
+        <button id="agregar-familiar">Agregar campo</button>
+        <button class="oculto" id="quitar-campos">Quitar campos</button>
+
+        <div id="integrantes">
+
+        </div>
+
+        <button class="oculto" id="calcular">Calcular</button>
+
+        <button class="oculto" id="resetear">Resetear</button>
+
+        <div id="resultados">
+            <div id="mayor-salario-anual"></div>
+            <div id="menor-salario-anual"></div>
+            <div id="salario-anual-promedio"></div>
+            <div id="salario-mensual-promedio"></div>
+        </div>
+
+
+
+    </form>
+
+
+</body>
+
+
+<script src="calculos.js"></script>
+<script src="clase_6_tarea_2.js"></script>
+
+
+</html>
