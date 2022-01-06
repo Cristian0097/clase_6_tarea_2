@@ -16,13 +16,23 @@ document.querySelector("#quitar-campos").onclick = function () {
 }
 
 document.querySelector("#calcular").onclick = function () {
-    mostrarResultados()
 
-    ocultarElemento("#agregar-familiar")
-    ocultarElemento("#quitar-campos")
-    ocultarElemento("#calcular")
-    mostrarElemento("#resetear")
+    function validarSalarios() {
+        let salariosDeFamiliares = obtenerSalarios()
+        if (salariosDeFamiliares.length === 0) {
+            alert('Debe ingresar el salario de al menos 1 familiar')
+        } else {
 
+            mostrarResultados()
+
+            ocultarElemento("#agregar-familiar")
+            ocultarElemento("#quitar-campos")
+
+            mostrarElemento("#resetear")
+        }
+    }
+
+    validarSalarios()
 
     return false
 }
@@ -33,7 +43,7 @@ document.querySelector("#resetear").onclick = function () {
     ocultarElemento("#resetear")
 
     mostrarElemento("#agregar-familiar")
-    
+
 }
 
 let numero = 0
@@ -85,7 +95,7 @@ function borrarResultados() {
     document.querySelector("#menor-salario-anual").textContent = ''
     document.querySelector("#salario-anual-promedio").textContent = ''
     document.querySelector("#salario-mensual-promedio").textContent = ''
-}   
+}
 
 function mostrarElemento(id) {
     document.querySelector(id).className = ''
