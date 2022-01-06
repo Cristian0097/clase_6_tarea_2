@@ -2,9 +2,9 @@ let integrantes = document.querySelector("#integrantes")
 
 document.querySelector("#agregar-familiar").onclick = function () {
     agregarInputs()
-    mostrarBotonQuitarCampo()
+    mostrarElemento("#quitar-campos")
     if (document.querySelectorAll("#integrante").length > 1) {
-        mostrarBotonCalcular()
+        mostrarElemento("#calcular")
     }
 
     return false
@@ -12,16 +12,16 @@ document.querySelector("#agregar-familiar").onclick = function () {
 
 document.querySelector("#quitar-campos").onclick = function () {
     quitarInputs()
-    ocultarBotonQuitarCampo()
+    ocultarElemento("#quitar-campos")
 }
 
 document.querySelector("#calcular").onclick = function () {
     mostrarResultados()
 
-    ocultarBotonAgregarCampo()
-    ocultarBotonQuitarCampo()
-    ocultarBotonCalcular()
-    mostrarBotonResetear()
+    ocultarElemento("#agregar-familiar")
+    ocultarElemento("#quitar-campos")
+    ocultarElemento("#calcular")
+    mostrarElemento("#resetear")
 
 
     return false
@@ -30,9 +30,9 @@ document.querySelector("#calcular").onclick = function () {
 document.querySelector("#resetear").onclick = function () {
     quitarInputs()
     borrarResultados()
-    ocultarBotonResetear()
+    ocultarElemento("#resetear")
 
-    mostrarBotonAgregarCampo()
+    mostrarElemento("#agregar-familiar")
     
 }
 
@@ -87,35 +87,10 @@ function borrarResultados() {
     document.querySelector("#salario-mensual-promedio").textContent = ''
 }   
 
-
-function mostrarBotonQuitarCampo() {
-    document.querySelector("#quitar-campos").className = ''
+function mostrarElemento(id) {
+    document.querySelector(id).className = ''
 }
 
-function ocultarBotonQuitarCampo() {
-    document.querySelector("#quitar-campos").className = 'oculto'
-}
-
-function mostrarBotonCalcular() {
-    document.querySelector("#calcular").className = ''
-}
-
-function ocultarBotonCalcular() {
-    document.querySelector("#calcular").className = 'oculto'
-}
-
-function mostrarBotonAgregarCampo() {
-    document.querySelector("#agregar-familiar").className = ''
-}
-
-function ocultarBotonAgregarCampo() {
-    document.querySelector("#agregar-familiar").className = 'oculto'
-}
-
-function mostrarBotonResetear() {
-    document.querySelector("#resetear").className = ''
-}
-
-function ocultarBotonResetear() {
-    document.querySelector("#resetear").className = 'oculto'
+function ocultarElemento(id) {
+    document.querySelector(id).className = 'oculto'
 }
