@@ -17,22 +17,20 @@ document.querySelector("#quitar-campos").onclick = function () {
 
 document.querySelector("#calcular").onclick = function () {
 
-    function validarSalarios() {
-        let salariosDeFamiliares = obtenerSalarios()
-        if (salariosDeFamiliares.length === 0) {
-            alert('Debe ingresar el salario de al menos 1 familiar')
-        } else {
+    validarSalarios(obtenerSalarios())
 
-            mostrarResultados()
+    if (obtenerSalarios().length <= 1) {
+        alert('Debe ingresar el salario de al menos 2 familiares')
+    } else {
 
-            ocultarElemento("#agregar-familiar")
-            ocultarElemento("#quitar-campos")
+        mostrarResultados()
 
-            mostrarElemento("#resetear")
-        }
+        ocultarElemento("#agregar-familiar")
+        ocultarElemento("#quitar-campos")
+
+        mostrarElemento("#resetear")
+
     }
-
-    validarSalarios()
 
     return false
 }
@@ -103,4 +101,12 @@ function mostrarElemento(id) {
 
 function ocultarElemento(id) {
     document.querySelector(id).className = 'oculto'
+}
+
+function validarSalarios(salarios) {
+    if (salarios.length === 0) {
+        return 'Debe ingresar el salario de al menos 2 familiares'
+    }
+
+    return ''
 }
