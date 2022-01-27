@@ -16,20 +16,34 @@ document.querySelector("#quitar-campos").onclick = function () {
 }
 
 document.querySelector("#calcular").onclick = function () {
+    let $salarios = document.querySelectorAll("#integrante input")
+    let arraySalarios = []
 
-    validarSalarios(obtenerSalarios())
+    let errores = 0
 
-    if (obtenerSalarios().length <= 1) {
-        alert('Debe ingresar el salario de al menos 2 familiares')
-    } else {
+    $salarios.forEach(function (salario) {
+        if (validarSalarios(salario.value)) {
+            errores++
+            salario.className = 'error'
+            document.querySelector("#error-salarios").textContent = validarSalarios(salario.value)
 
-        mostrarResultados()
+        } else {
+            salario.className = ''
+            document.querySelector("#error-salarios").textContent = ''
 
-        ocultarElemento("#agregar-familiar")
-        ocultarElemento("#quitar-campos")
+        }
+    
+    })
 
-        mostrarElemento("#resetear")
+    let esExito = errores === 0
 
+    if (esExito) {
+
+        $salarios.forEach(function (salario) {
+            arraySalarios.push(Number(salario.value))
+        })
+
+        mostrarResultados(arraySalarios)
     }
 
     return false
@@ -68,24 +82,11 @@ function quitarInputs() {
     }
 }
 
-function obtenerSalarios() {
-    let $salarios = document.querySelectorAll("#integrante input")
-    let salarios = []
-
-    for (let i = 0; i < $salarios.length; i++) {
-        if ($salarios[i].value != 0)
-            salarios.push(Number($salarios[i].value))
-    }
-
-    return salarios
-}
-
-function mostrarResultados() {
-    const salariosIntegrantes = obtenerSalarios()
-    document.querySelector("#mayor-salario-anual").textContent = 'El mayor salario es ' + encontrarMayorSalario(salariosIntegrantes) + 'U$D'
-    document.querySelector("#menor-salario-anual").textContent = 'El menor salario es ' + encontrarMenorSalario(salariosIntegrantes) + 'U$D'
-    document.querySelector("#salario-anual-promedio").textContent = 'El salario anual promedio es ' + calcularSalarioAnualPromedio(salariosIntegrantes) + 'U$D'
-    document.querySelector("#salario-mensual-promedio").textContent = 'El salario mensual promedio es ' + calcularSalarioMensualPromedio(salariosIntegrantes) + 'U$D'
+function mostrarResultados(salarios) {
+    document.querySelector("#mayor-salario-anual").textContent = 'El mayor salario es ' + encontrarMayorSalario(salarios) + 'U$D'
+    document.querySelector("#menor-salario-anual").textContent = 'El menor salario es ' + encontrarMenorSalario(salarios) + 'U$D'
+    document.querySelector("#salario-anual-promedio").textContent = 'El salario anual promedio es ' + calcularSalarioAnualPromedio(salarios) + 'U$D'
+    document.querySelector("#salario-mensual-promedio").textContent = 'El salario mensual promedio es ' + calcularSalarioMensualPromedio(salarios) + 'U$D'
 }
 
 function borrarResultados() {
@@ -103,10 +104,19 @@ function ocultarElemento(id) {
     document.querySelector(id).className = 'oculto'
 }
 
-function validarSalarios(salarios) {
-    if (salarios.length === 0) {
-        return 'Debe ingresar el salario de al menos 2 familiares'
-    }
+function validarSalarios(salario) {
 
-    return ''
+    if (!/^[0-9]\d*$/.test(salario)) {
+
+        return 'El campo solo acepta 1 o mas numeros del 0 al 9'
+
+    } else if (salario + 1 <= 1) {
+
+        return 'El numero no puede ser 0, ni un valor negativo, ni vacio'
+
+    } else {
+
+        return ''
+
+    }
 }
